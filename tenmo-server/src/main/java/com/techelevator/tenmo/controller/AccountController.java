@@ -1,21 +1,27 @@
+
 package com.techelevator.tenmo.controller;
 
-
+import com.techelevator.tenmo.exceptions.UnauthorizedAccessException;
+import com.techelevator.tenmo.model.*;
 import com.techelevator.tenmo.business.AccountService;
 import com.techelevator.tenmo.business.TransferService;
 import com.techelevator.tenmo.business.UserService;
-import com.techelevator.tenmo.model.Transfer;
-import com.techelevator.tenmo.model.TransferDTO;
-import com.techelevator.tenmo.model.TransferStatus;
-import com.techelevator.tenmo.model.User;
+import com.techelevator.tenmo.util.BasicLogger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
+
 
 @RestController
+@PreAuthorize("hasRole('ROLE_USER')")
+
 public class AccountController {
 
     AccountService accountService;
@@ -29,61 +35,50 @@ public class AccountController {
         this.transferService = transferService;
     }
 
-    @GetMapping("/{id}/balance")
-    public BigDecimal getBalance(@PathVariable long id) {
-        return accountService.getBalance(id);
+    @GetMapping("account/{accountId}/balance")
+    public BigDecimal getBalance(@PathVariable long accountId, Principal principal) {
 
-        //return accountService.getBalance(id);
+        if (principal.getName().equals(userService.findByAccountId(accountId).getUsername())) {
+            return accountService.getBalance(accountId);
+        } else {
+            BasicLogger.log("User: " + principal.getName() + " attempted unauthorized account access.");
+            throw new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "Short AND stout!!");
+        }
     }
 
-    /* returns Transfer object. might be useful for printing transfer status */
-    @PostMapping("/transfer/send")
-    public Transfer sendTransfer(@RequestBody TransferDTO transferDetails) {
-        Transfer transfer = transferService.createTransfer(transferDetails);
-        return transferService.sendTransfer(transfer);
+    @GetMapping("account/{accountId}")
+    public Account findByAccountId (@PathVariable long accountId, Principal principal) {
+        if (principal.getName().equals(userService.findByAccountId(accountId).getUsername())) {
+            return accountService.findByAccountId(accountId);
+        } else {
+            BasicLogger.log("User: " + principal.getName() + " attempted unauthorized account access.");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
+
     }
 
-    @PostMapping("/transfer/accept")
-    public Transfer acceptTransfer(@RequestBody Transfer pendingTransfer) {
-        return transferService.sendTransfer(pendingTransfer);
-    }
-
-    @GetMapping("/{id}/transfer")
-    public List<Transfer> allTransfersByAccountId(@PathVariable long id) {
-        return transferService.findAllByAccountId(id);
-    }
-
-    @GetMapping("/transfer/{id}")
-    public Optional<Transfer> getTransferByTransferId(@PathVariable long id) {
-        return transferService.findByTransferId(id);
-    }
-
-    @GetMapping("/users")
+    @GetMapping("users")
     public List<User> getAllUsers() {
         return userService.findAll();
     }
 
-    @PostMapping("/transfer/request")
-    public Transfer requestTransfer(@RequestBody TransferDTO transferDetails) {
-        Transfer transfer = transferService.createTransfer(transferDetails);
-        return transferService.requestTransfer(transfer);
+    @GetMapping("user/{userId}")
+    public User findByUserId (@PathVariable long userId) {
+        return userService.findByUserId(userId);
     }
 
-    @GetMapping("/{id}/transfer/status")
-    public List<Transfer> transfersByStatusAndUser (@PathVariable long id, @RequestBody TransferStatus transferStatus) {
-        return transferService.findAllByStatusAndUser(transferStatus.getTransferStatusId(), id);
+    @GetMapping("user/{userId}/account")
+    public Account findAccountByUserId (@PathVariable long userId, Principal principal) {
+        if (principal.getName().equals(userService.findByUserId(userId).getUsername())) {
+            return accountService.findByUserId(userId);
+        } else {
+            BasicLogger.log("User: " + principal.getName() + " attempted unauthorized account access.");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        }
     }
 
-
-//
-//    @PostMapping("/transfer/accept")
-//    public Transfer acceptTransfer(@RequestBody TransferDTO transferDetails) {
-//        Transfer transfer = transferService.createTransfer(transferDetails);
-//        return transferService.sendTransfer(transfer);
-//    }
-
-//    @PostMapping("/{id}/balance")
-//    public BigDecimal setBalance(@PathVariable long id, @RequestBody TransferDTO transferDetails) {
-//        return accountService.setBalance(id, transferDetails);
-//    }
+    @GetMapping("/user/principal")
+    public Principal findPrincipal(Principal principal) {
+        return principal;
+    }
 }

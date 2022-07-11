@@ -4,6 +4,7 @@ public class User {
 
     private Long id;
     private String username;
+    private Account account;
 
     public Long getId() {
         return id;
@@ -19,6 +20,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     @Override

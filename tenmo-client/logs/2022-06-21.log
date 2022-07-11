@@ -1,0 +1,50 @@
+2022-06-21T13:31:07.749339 null Invalid Amount Entered
+2022-06-21T13:31:11.7224565 500 : [{"timestamp":"2022-06-21T17:31:11.717+00:00","status":500,"error":"Internal Server Error","message":"No message available","path":"/transfer/send"}]
+2022-06-21T13:33:56.6465636 500 : [{"timestamp":"2022-06-21T17:33:56.645+00:00","status":500,"error":"Internal Server Error","message":"No message available","path":"/transfer/send"}]
+2022-06-21T13:34:20.4997121 500 : [{"timestamp":"2022-06-21T17:34:20.499+00:00","status":500,"error":"Internal Server Error","message":"No message available","path":"/transfer/send"}]
+2022-06-21T13:36:46.109038 500 : [{"timestamp":"2022-06-21T17:36:46.108+00:00","status":500,"error":"Internal Server Error","message":"No message available","path":"/transfer/send"}]
+2022-06-21T13:45:59.9136544 500 : [{"timestamp":"2022-06-21T17:45:59.902+00:00","status":500,"error":"Internal Server Error","message":"No message available","path":"/transfer/reject/3007"}]
+2022-06-21T14:26:04.0559518 null | Current user: tuesday
+2022-06-21T14:27:29.3279735 null | Current user: tuesday
+2022-06-21T14:27:52.6728461 null | Current user: tuesday
+2022-06-21T14:28:17.0572139 null | Current user: tuesday
+2022-06-21T14:29:21.8050799 null | Current user: tuesday
+2022-06-21T14:30:24.4129651 500 : [{"timestamp":"2022-06-21T18:30:24.395+00:00","status":500,"error":"Internal Server Error","message":"No message available","path":"/login"}]
+2022-06-21T14:30:36.0563643 401 : [no body]
+2022-06-21T14:35:37.790525 500 : [{"timestamp":"2022-06-21T18:35:37.759+00:00","status":500,"error":"Internal Server Error","message":"No message available","path":"/login"}]
+2022-06-21T14:35:57.3207957 401 : [no body]
+2022-06-21T14:37:37.0464942 401 : [no body]
+2022-06-21T18:16:07.5832874 401 : [no body]
+2022-06-21T18:20:42.4616397 401 : [no body]
+2022-06-21T18:20:57.1901486 401 : [no body]
+2022-06-21T18:21:08.0220282 401 : [no body]
+2022-06-21T18:22:47.8569639 For input string: "100.00" Invalid ID Entered
+2022-06-21T18:22:50.2016375 For input string: "" Invalid ID Entered
+2022-06-21T18:22:51.7362284 For input string: "" Invalid ID Entered
+2022-06-21T18:24:19.1371778 For input string: "100.00" Invalid ID Entered
+2022-06-21T18:27:52.2251269 401 : [no body]
+2022-06-21T18:28:40.5787496 For input string: "" Invalid ID Entered
+2022-06-21T18:28:49.8855968 For input string: "1001\" Invalid ID Entered
+2022-06-21T18:29:10.5701877 For input string: "" Invalid ID Entered
+2022-06-21T18:29:13.8778861 For input string: "" Invalid ID Entered
+2022-06-21T18:34:51.7809895 500 : [{"timestamp":"2022-06-21T22:34:51.764+00:00","status":500,"error":"Internal Server Error","message":"No message available","path":"/transfer/2222"}]
+2022-06-21T18:34:51.7839606 null | Current user: test
+2022-06-21T18:36:46.3558073 401 : [no body]
+2022-06-21T18:38:24.8423053 500 : [{"timestamp":"2022-06-21T22:38:24.829+00:00","status":500,"error":"Internal Server Error","message":"No message available","path":"/transfer/2007"}]
+2022-06-21T18:38:24.8432971 null | Current user: alison
+2022-06-21T18:40:33.4181473 401 : [no body]
+2022-06-21T18:40:43.0111154 401 : [no body]
+2022-06-21T18:46:37.4760542 401 : [no body]
+2022-06-21T18:47:58.0237797 500 : [{"timestamp":"2022-06-21T22:47:58.012+00:00","status":500,"error":"Internal Server Error","message":"No message available","path":"/transfer/3077"}]
+2022-06-21T18:47:58.0242758 null | Current user: alison
+2022-06-21T18:52:11.3581818 401 : [no body]
+2022-06-21T19:05:06.6922836 For input string: "4.04" Invalid ID Entered
+2022-06-21T19:17:15.3528046 401 : [no body]
+2022-06-21T19:21:27.8073474 401 : [no body]
+2022-06-21T19:28:10.0939408 401 : [no body]
+2022-06-21T19:28:43.3326494 For input string: "" Invalid ID Entered
+2022-06-21T19:28:44.3224777 For input string: "" Invalid ID Entered
+2022-06-21T20:25:04.1870619 For input string: "4.04" Invalid ID Entered
+2022-06-21T20:26:28.2035774 For input string: "6.06" Invalid ID Entered
+2022-06-21T20:27:44.8903529 401 : [{"timestamp":"2022-06-22T00:27:44.875+00:00","status":401,"error":"Unauthorized","message":"401 UNAUTHORIZED","path":"/transfer/3002"}]
+2022-06-21T20:27:44.8938252 null | Current user: alison

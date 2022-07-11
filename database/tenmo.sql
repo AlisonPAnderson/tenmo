@@ -1,8 +1,20 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS transfer, account, tenmo_user, transfer_type, transfer_status;
+
 DROP SEQUENCE IF EXISTS seq_user_id, seq_account_id, seq_transfer_id;
 
+DROP CAST IF EXISTS (character varying AS transfer_type_enum); 
+DROP CAST IF EXISTS (character varying AS transfer_status_enum);
+
+DROP TYPE IF EXISTS transfer_type_enum, transfer_status_enum;
+
+CREATE TYPE transfer_type_enum AS ENUM ('request', 'send');
+
+CREATE TYPE transfer_status_enum as ENUM ('pending', 'approved', 'rejected', 'invalid_transfer', 'invalid_amount', 'user_not_found', 'nsf', 'unauthorized');
+
+CREATE CAST (character varying AS transfer_type_enum) WITH INOUT AS ASSIGNMENT;
+CREATE CAST (character varying AS transfer_status_enum) WITH INOUT AS ASSIGNMENT;
 
 CREATE TABLE transfer_type (
 	transfer_type_id serial NOT NULL,
@@ -15,6 +27,7 @@ CREATE TABLE transfer_status (
 	transfer_status_desc varchar(10) NOT NULL,
 	CONSTRAINT PK_transfer_status PRIMARY KEY (transfer_status_id)
 );
+
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
@@ -49,16 +62,14 @@ CREATE SEQUENCE seq_transfer_id
 
 CREATE TABLE transfer (
 	transfer_id int NOT NULL DEFAULT nextval('seq_transfer_id'),
-	transfer_type_id int NOT NULL,
-	transfer_status_id int NOT NULL,
+	transfer_type transfer_type_enum NOT NULL,
+	transfer_status transfer_status_enum NOT NULL,
 	account_from int NOT NULL,
 	account_to int NOT NULL,
 	amount decimal(13, 2) NOT NULL,
 	CONSTRAINT PK_transfer PRIMARY KEY (transfer_id),
 	CONSTRAINT FK_transfer_account_from FOREIGN KEY (account_from) REFERENCES account (account_id),
 	CONSTRAINT FK_transfer_account_to FOREIGN KEY (account_to) REFERENCES account (account_id),
-	CONSTRAINT FK_transfer_transfer_status FOREIGN KEY (transfer_status_id) REFERENCES transfer_status (transfer_status_id),
-	CONSTRAINT FK_transfer_transfer_type FOREIGN KEY (transfer_type_id) REFERENCES transfer_type (transfer_type_id),
 	CONSTRAINT CK_transfer_not_same_account CHECK (account_from <> account_to),
 	CONSTRAINT CK_transfer_amount_gt_0 CHECK (amount > 0)
 );

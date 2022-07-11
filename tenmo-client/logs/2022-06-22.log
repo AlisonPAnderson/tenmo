@@ -1,0 +1,10 @@
+2022-06-22T09:43:54.3373003 401 : [no body]
+2022-06-22T09:44:49.4042212 d != java.math.BigDecimal | Current user: alison
+2022-06-22T09:50:39.5009556 401 : [no body]
+2022-06-22T09:51:47.5903936 For input string: "" Invalid ID Entered
+2022-06-22T09:51:52.595894 400 : [{"timestamp":"2022-06-22T13:51:52.592+00:00","status":400,"error":"Bad Request","message":"400 BAD_REQUEST","path":"/transfer/1111"}]
+2022-06-22T09:51:52.5963906 null | Current user: alison
+2022-06-22T09:52:22.3233687 401 : [no body]
+2022-06-22T10:56:45.9219422 401 : [no body]
+2022-06-22T10:57:33.8406781 Character \ is neither a decimal digit number, decimal point, nor "e" notation exponential mark. Invalid Amount Entered
+2022-06-22T10:57:47.2057036 d != java.math.BigDecimal | Current user: alison

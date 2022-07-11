@@ -10,10 +10,6 @@ import java.util.List;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
-    // public BigDecimal getBalanceByUsername(String username);
-
-    BigDecimal findBalanceByUserId(long id);
-
     Account findByUserId(long id);
 
     Account findById(long id);
